@@ -1,1 +1,1 @@
-# 2DShrimp
+# Shrimp2D
