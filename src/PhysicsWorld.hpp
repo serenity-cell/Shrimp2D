@@ -13,6 +13,6 @@ class PhysicsWorld{
         void add_object(RigidBody* body) {/* ... */};
         void remove_object(RigidBody* body) {/* ... */};
 
-        void step (float DeltaTime) {}
+        void step (float DeltaTime);
 
 };
