@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/Shrimp2D.dir/main.cpp.o -o Shrimp2D 
