@@ -14,17 +14,18 @@ class rigid_body
           position_previous(initPos),
           acceleration(0.0f)
     {}
-
     // convenience overload
     rigid_body(float x, float y)
         : rigid_body(glm::vec2(x, y))
     {}
 
+    
     glm::vec2 get_position_current() const
     {
         return position_current;
     }
 
+    //adds acce1leration to the current position, then resets acceleration to zero
     void update_position(float deltaTime)
     {
         const glm::vec2 velocity = position_current - position_previous;
@@ -34,7 +35,7 @@ class rigid_body
         acceleration = {};
     }
 
-    // renamed to avoid collision with member variable
+
     void add_acceleration(const glm::vec2& accel)
     {   
         acceleration += accel;
