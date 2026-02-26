@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/justin/Desktop/Personal-Projects/Shrimp2D/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/Shrimp2D.dir/src/main.cpp.o -c /home/justin/Desktop/Personal-Projects/Shrimp2D/src/main.cpp",
+  "file": "/home/justin/Desktop/Personal-Projects/Shrimp2D/src/main.cpp",
+  "output": "CMakeFiles/Shrimp2D.dir/src/main.cpp.o"
+}
+]

@@ -6,7 +6,6 @@ struct rigid_body
     glm::vec2 position_current;
     glm::vec2 position_previous;
     glm::vec2 acceleration;
-
     void update_position(float deltaTime)
     {
         const glm::vec2 velocity = position_current - position_previous;
@@ -20,4 +19,11 @@ struct rigid_body
     {
         acceleration += accel;
     }
+};
+
+struct circle
+{
+    
+    glm::vec2 center;
+    float radius;
 };
