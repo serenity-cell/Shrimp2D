@@ -2,18 +2,19 @@
 
 void PhysicsWorld::run()
 {
-    while (true)
-    {
-        this->initWindow();
+    this->initWindow();
         
-        // update dt
+    while (this->window->isOpen())
+    {
+       
+        // update deltaTime
         this->updateDt();
 
         // update SFML events
         this->updateSFMLEvents();
 
         // update the current state
-        this->update();
+        //this->update();
 
         // render the current state
         this->render();
@@ -21,19 +22,30 @@ void PhysicsWorld::run()
 }
 
 void PhysicsWorld::updateSFMLEvents()
-{
-    if (this->sfEvent.type == sf::Event::Closed)
-        this->window->close();
+{   this->sfEvent;
+     while (this->window->pollEvent(sfEvent))
+        {
+            // Close window: exit
+            if (sfEvent.type == sf::Event::Closed)
+                this->window->close();
+        }
+
 }
 
 void PhysicsWorld::updateDt()
 {
-    // update the dt variable with the time it takes to render a frame
-    this->dt = this->dtClock.restart().asSeconds();
+    // update the deltaTime variable with the time it takes to render a frame
+    this->deltaTime = this->dtClock.restart().asSeconds();
 }
 
 void PhysicsWorld::initWindow()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Shrimp2D");
+    this->window = new sf::RenderWindow(sf::VideoMode({800, 600}), "Shrimp2D");
     
+}
+
+void PhysicsWorld::render()
+{
+    this->window->clear();
+    this->window->display();
 }

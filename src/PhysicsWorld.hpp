@@ -11,38 +11,41 @@
 #include <vector>
 
 
-
+#ifndef PHYSICSWORLD_HPP
+#define PHYSICSWORLD_HPP
 class PhysicsWorld
 {
-    private:
+    protected:
 
-        sf::RenderWindow *window;
+        sf::RenderWindow* window;
         sf::Event sfEvent;
 
         // dt or delta time keeps track of how long it takes
         // to render a frame
         sf::Clock dtClock;
-        float dt;
+        float deltaTime;
 
         // keyboard keys are int data type as the keyboard in sf
         // is defined as an enum
         std::map<std::string, int> supportedKeys;
 
         //initializing the window and states
-        void initWindow(){};
+        void initWindow();
 
     public:
-        PhysicsWorld(){};
-        virtual ~PhysicsWorld(){};
+        //PhysicsWorld();
+        //virtual ~PhysicsWorld();
 
-        void endApplication(){};
+        //void endApplication();
 
         // reseting dt on PhysicsWorld loop
-        void updateDt(){};
+        void updateDt();
         // updating SFML on PhysicsWorld loop
-        void updateSFMLEvents(){};
-        void update(){};
-        void render(){};
+        void updateSFMLEvents();
+        //void update();
+        void render();
         // running PhysicsWorld
-        void run(){};
+        void run();
 };
+
+#endif
