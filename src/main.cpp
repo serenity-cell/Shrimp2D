@@ -1,7 +1,9 @@
-#include <iostream>
-#include "RigidBody.hpp"
-#include "Collision.hpp"
+//#include "RigidBody.hpp"
+#include "PhysicsWorld.hpp"
+//#include "Collision.hpp"
 
-int main(int, char**){
-    std::cout << "Hello, from Shrimp2D!\n";
+int main()
+{
+    PhysicsWorld world;
+    world.run();
 }
