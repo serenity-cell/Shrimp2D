@@ -7,7 +7,7 @@ struct Solver
 {
     glm::vec2 gravity = glm::vec2(0.0f, -9.81f);
 
-    void apply_gravity(rigid_body& body){
+    void apply_gravity(circle& body){
         body.add_acceleration(gravity);
     };
 
