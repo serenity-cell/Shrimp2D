@@ -10,24 +10,15 @@ class circle
 
     public:
     // construct with an initial position (defaults to origin)
-    circle(const glm::vec2& initPos = glm::vec2(0.0f))
-    {}
+    circle(const glm::vec2& initPos);
     // convenience overload
-    circle(float x, float y)
-    {}
+    circle(float x, float y);
 
     //--main code--
-    glm::vec2 get_position_current() const{return position_current;}
+    glm::vec2 get_position_current() const;
 
     //adds acce1leration to the current position, then resets acceleration to zero
-    void update_position(float deltaTime)
-    {
-        position_current += acceleration * deltaTime;
-        acceleration = glm::vec2(0.0f);
-    }
+    void update_position(float deltaTime);
 
-    void add_acceleration(const glm::vec2& accel)
-    {
-        acceleration += accel;
-    }
+    void add_acceleration(const glm::vec2& accel);
 };
