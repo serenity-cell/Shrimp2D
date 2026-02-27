@@ -11,7 +11,7 @@ add_executable(Shrimp2D src/main.cpp)
 
 # link SFML libraries (using imported targets and PRIVATE linkage)
 # the SFML targets automatically provide include directories
-target_link_libraries(Shrimp2D PRIVATE sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
+target_link_libraries(Shrimp2D PUBLIC sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
 
 include(CTest)
 enable_testing()
