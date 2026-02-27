@@ -1,20 +1,19 @@
 #pragma once
 
-#include "RigidBody.hpp"
+#include <SFML/Graphics.hpp>  // defines sf::RenderWindow, sf::Texture, sf::RenderTarget
+#include <map>
+#include <vector>
 
 class State
 {
 private:
 
 protected:
-	sf::RenderWindow* window;
-	std::map<std::string, int>* supportedKeys;
-	std::map<std::string, int> keybinds;
-	bool quit;
+    sf::RenderWindow* window;
+    bool quit;
 
-	std::vector<sf::Texture*> textures;
+    std::vector<sf::Texture*> textures;
 
-	virtual void initKeybinds() = 0;
 
 public:
 	State(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys);
@@ -35,5 +34,5 @@ public:
 	virtual void update(const float& dt) = 0;
 	// if there is no target, render to window
 	// if there is a target, render there instead
-	virtual void render(sf::RenderTarget* target = nullptr) = 0;
+    virtual void render(sf::RenderTarget* target = nullptr) = 0;
 };
