@@ -1,14 +1,6 @@
 #pragma once
 #include "glm/glm.hpp"
 
-// including sfml headers
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-
-
 class circle
 {   
     private:
@@ -25,13 +17,17 @@ class circle
     {}
 
     //--main code--
-    glm::vec2 get_position_current() const
-    {}
+    glm::vec2 get_position_current() const{return position_current;}
 
     //adds acce1leration to the current position, then resets acceleration to zero
     void update_position(float deltaTime)
-    {}
+    {
+        position_current += acceleration * deltaTime;
+        acceleration = glm::vec2(0.0f);
+    }
 
     void add_acceleration(const glm::vec2& accel)
-    {}
+    {
+        acceleration += accel;
+    }
 };
