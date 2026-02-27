@@ -1,8 +1,13 @@
 #include "PhysicsWorld.hpp"
 
+
 void PhysicsWorld::run()
 {
     this->initWindow();
+    
+    // draw anything here
+    sf::CircleShape circle();
+    
         
     while (this->window->isOpen())
     {
@@ -23,11 +28,15 @@ void PhysicsWorld::run()
 
 void PhysicsWorld::updateSFMLEvents()
 {   this->sfEvent;
-     while (this->window->pollEvent(sfEvent))
+
+    while (this->window->pollEvent(sfEvent))
         {
             // Close window: exit
             if (sfEvent.type == sf::Event::Closed)
                 this->window->close();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+                this->window->close();
+
         }
 
 }
