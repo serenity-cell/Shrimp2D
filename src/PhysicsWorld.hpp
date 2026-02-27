@@ -1,5 +1,15 @@
 #pragma once
-#include "RigidBody.hpp"
+
+// SFML types used by PhysicsWorld
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Window.hpp>
+
+#include <iostream>
+#include <map>
+#include <stack>
+#include <vector>
+
 
 
 class PhysicsWorld
@@ -14,30 +24,25 @@ class PhysicsWorld
         sf::Clock dtClock;
         float dt;
 
-        //creating a stack of possible states ie. menu
-        //std::stack<State*> states;
-
         // keyboard keys are int data type as the keyboard in sf
         // is defined as an enum
         std::map<std::string, int> supportedKeys;
 
         //initializing the window and states
-        void initWindow();
-        void initKeys();
-        void initStates();
+        void initWindow(){};
 
     public:
-        PhysicsWorld();
-        virtual ~PhysicsWorld();
+        PhysicsWorld(){};
+        virtual ~PhysicsWorld(){};
 
-        void endApplication();
+        void endApplication(){};
 
         // reseting dt on PhysicsWorld loop
-        void updateDt();
+        void updateDt(){};
         // updating SFML on PhysicsWorld loop
-        void updateSFMLEvents();
-        void update();
-        void render();
+        void updateSFMLEvents(){};
+        void update(){};
+        void render(){};
         // running PhysicsWorld
-        void run();
+        void run(){};
 };
