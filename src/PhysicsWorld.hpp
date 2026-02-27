@@ -1,5 +1,7 @@
 #pragma once
 
+#include "State.hpp"
+
 // SFML types used by PhysicsWorld
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
