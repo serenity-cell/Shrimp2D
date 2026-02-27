@@ -6,8 +6,8 @@
 circle::circle(const glm::vec2& initPos = glm::vec2(0.0f))
     : position_current(initPos),
         position_previous(initPos),
-        acceleration(0.0f)
-{}
+        acceleration(0.0f){}
+
 // convenience overload
 circle::circle(float x, float y)
     : circle(glm::vec2(x, y))
