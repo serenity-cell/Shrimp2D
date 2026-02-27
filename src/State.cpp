@@ -10,6 +10,7 @@ State::~State() {
 }
 
 const bool & State::getQuit() const {
+	
 	return this->quit;
 }
 
