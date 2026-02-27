@@ -7,7 +7,7 @@ set(SFML_DIR "<sfml-install-path>/lib/cmake/SFML") # Optional, might be needed i
 find_package(SFML REQUIRED COMPONENTS audio network graphics window system)
 
 # create executable after the package has been found
-add_executable(Shrimp2D src/main.cpp)
+add_executable(Shrimp2D src/main.cpp src/PhysicsWorld.cpp src/RigidBody.cpp src/State.cpp)
 
 # link SFML libraries (using imported targets and PRIVATE linkage)
 # the SFML targets automatically provide include directories
