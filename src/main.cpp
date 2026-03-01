@@ -1,7 +1,7 @@
-#include "PhysicsWorld.hpp"
+#include "physicsWorld.hpp"
 
 int main()
 {   
-    PhysicsWorld world;
+    physicsWorld world;
     world.run();
 }
