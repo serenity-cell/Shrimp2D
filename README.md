@@ -1,7 +1,5 @@
 # Shrimp2D (work-in-progress)
 
- https://img.shields.io/badge/License-MIT_Licence-blue
-
 ## Project Description
 Shrimp2D is a 2d physics engine with mainly (for now) circles. i used pure c++ for the whole project with the purpose of imrpovement in mind. I hope to add more shapes to it with the next step potentially being squares/rectangles.
 
