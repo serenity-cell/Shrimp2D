@@ -13,9 +13,12 @@ void solver::applyGravity(circle& body)
 }
 
 bool solver::isColliding(const glm::vec2& a, const glm::vec2& b, const int radiusA, const int radiusB)
-{
-    return radiiSum(radiusA, radiusB) >= pow(2, b.x - a.x) + pow(2, b.y - a.y); // we are chckin the radii sum to the distance 
-}
+{   
+    float sumX = b.x - a.x;
+    float sumY = b.y - a.y;
+    float r = radiiSum(radiusA, radiusB);
+    return r * r >= sumX*sumX + sumY*sumY; // we are chckin the radii sum to the distance 
+ }
 
 float solver::dotProduct(const glm::vec2& a, const glm::vec2& b)
 {
@@ -32,24 +35,32 @@ glm::vec2 solver::collisionNormal(glm::vec2 objectA, glm::vec2 objectB)
     return glm::normalize(objectA - objectB);
 }
 
-float solver::relativeVelocity(float velocityA, float velocityB)
+glm::vec2 solver::relativeVelocity(glm::vec2 velocityA, glm::vec2 velocityB)
 {
     return velocityB - velocityA;
 }
 
-glm::vec2 solver::normalVelocity(float relativeVelocity, glm::vec2 normal)
+float solver::normalVelocity(glm::vec2 relativeVelocity, glm::vec2 normal)
 {
-    return relativeVelocity * normal;
+    return glm::dot(relativeVelocity, normal);
 }
 
-glm::vec2 solver::impulse(glm::vec2 normalVelocity, float epsilon, float massA, float massB)
+float solver::impulse(float normalVelocity, float epsilon, float massA, float massB)
 {
     return -(1 + epsilon) * normalVelocity / (1 / massA + 1 / massB);
 }
 
-float solver::resolveCollision (circle& bodyA, circle& bodyB)
+void solver::resolveCollision (circle& bodyA, circle& bodyB)
 {
-    
+    glm::vec2 normal = collisionNormal(bodyA.position, bodyB.position);
+    glm::vec2 relVel = relativeVelocity(bodyA.velocity, bodyB.velocity);
+    float normVel = normalVelocity(relVel, normal);
+
+    if (normVel > 0) return; // already separating
+
+    float j = impulse(normVel, epsilon, bodyA.mass, bodyB.mass);
+    bodyA.velocity -= (j / bodyA.mass) * normal;
+    bodyB.velocity += (j / bodyB.mass) * normal;
 }
 
 
