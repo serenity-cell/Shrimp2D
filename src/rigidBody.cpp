@@ -4,8 +4,7 @@ circle::circle(){}
 
 // construct with an initial position (defaults to origin)
 circle::circle(const glm::vec2& initPos = glm::vec2(0.0f))
-    : position_current(initPos),
-        position_previous(initPos),
+    : position(initPos),
         acceleration(0.0f){}
 
 // convenience overload
@@ -14,17 +13,17 @@ circle::circle(float x, float y)
 {}
 
 //--main code--
-glm::vec2 circle::get_position_current() const
+glm::vec2 circle::get_position() const
 {
-    return position_current;
+    return position;
 }
 
 //adds acce1leration to the current position, then resets acceleration to zero
 void circle::update_position(float deltaTime)
 {
-    const glm::vec2 velocity = position_current - position_previous;
-    position_previous = position_current;
-    position_current += velocity + acceleration * deltaTime * deltaTime;
+    const glm::vec2 velocity = position * deltaTime;
+    position = position;
+    position += velocity + acceleration * deltaTime * deltaTime;
 
     acceleration = {};
 }

@@ -3,13 +3,12 @@
 
 class circle
 {   
-    private:
-    glm::vec2 position_current;
-    glm::vec2 position_previous;
-    glm::vec2 acceleration;
-    
-
     public:
+    glm::vec2 position;
+    glm::vec2 velocity;
+    glm::vec2 acceleration;
+    float mass;
+
     float radius = 10.0;
     // construct with an initial position (defaults to origin)
     circle(const glm::vec2& initPos);
@@ -19,7 +18,7 @@ class circle
     circle();
 
     //--main code--
-    glm::vec2 get_position_current() const;
+    glm::vec2 get_position() const;
 
     
     //adds acce1leration to the current position, then resets acceleration to zero
