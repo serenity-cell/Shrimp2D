@@ -13,7 +13,7 @@ void physicsWorld::run()
         this->updateSFMLEvents();
 
         // update the current state
-        this->update();
+        //this->update();
 
         // render the current state
         this->window->clear();
@@ -59,7 +59,7 @@ void physicsWorld::render()
     for (float i = 0; i < totalCircles; i++) 
     {
         circles[i].setRadius(circleRigid.radius);
-        circles[i].setPosition(circleRigid.get_position().x + 20.0, circleRigid.get_position().y);
+        circles[i].setPosition(circleRigid.get_position().x + 20 * i, circleRigid.get_position().y);
     }
 
     for (auto& c : circles) 
