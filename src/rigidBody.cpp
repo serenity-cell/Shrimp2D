@@ -15,8 +15,12 @@ circleBody::circleBody(float x, float y)
 //--main code--
 glm::vec2 circleBody::get_position() const
 {
-
     return position;
+}
+
+void circleBody::add_acceleration(const glm::vec2& accel)
+{
+    acceleration = accel;
 }
 
 //adds acce1leration to the current position, then resets acceleration to zero
@@ -24,8 +28,9 @@ void circleBody::update_position(float deltaTime)
 {
     const glm::vec2 velocity = position * deltaTime;
     position = position;
-    position += velocity + acceleration * deltaTime * deltaTime;
+    position += velocity + acceleration * deltaTime;
 
     acceleration = {};
+    
 }
 

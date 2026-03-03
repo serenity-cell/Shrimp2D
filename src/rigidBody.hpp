@@ -9,6 +9,8 @@ class circleBody
     glm::vec2 velocity;
     glm::vec2 acceleration;
     float mass;
+
+    // radius
     float radius = 6.0;
 
 
@@ -22,7 +24,6 @@ class circleBody
     //--main code--
     glm::vec2 get_position() const;
 
-    
     //adds acce1leration to the current position, then resets acceleration to zero
     void update_position(float deltaTime);
 
