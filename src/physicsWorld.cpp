@@ -5,15 +5,7 @@ void physicsWorld::run()
 {
     this->initWindow();
     while (this->window->isOpen())
-    {  
-        std::vector<sf::CircleShape> circles(3);
-        for (int i = 0; i < 3; i++) 
-        {
-
-            circles[i].setRadius(circleRigid.radius);
-            circles[i].setPosition(100 * i + 100, 100);
-        }
-
+    {
         // update deltaTime
         this->updateDeltaTime();
 
@@ -25,10 +17,7 @@ void physicsWorld::run()
 
         // render the current state
         this->window->clear();
-        for (auto& c : circles) 
-        {
-            this->window->draw(c);
-        };
+        this->render();
         this->window->display();
     }
 }
@@ -53,24 +42,28 @@ void physicsWorld::updateDeltaTime()
     // update the deltaTime variable with the time it takes to render a frame
     sf::Time dt = deltaTimeInnit.restart();
     float deltaTime = dt.asMilliseconds();
-    //update position with the deltatime
-    circleRigid.update_position(deltaTime);
 }
 
+//initites the window at a resolution of 800, 600
 void physicsWorld::initWindow()
 {
     this->window = new sf::RenderWindow(sf::VideoMode({800, 600}), "Shrimp2D");
-    
 }
 
 void physicsWorld::render()
-{
-   std::vector<sf::CircleShape> circles(4);
-    for (int i = 0; i < 4; i++) 
+{  
+    int totalCircles = 6; // quanitiy of circles to render here
+
+    // renders multiple 
+    std::vector<sf::CircleShape> circles(totalCircles);
+    for (float i = 0; i < totalCircles; i++) 
     {
         circles[i].setRadius(circleRigid.radius);
-        circles[i].setPosition(100 * i + 100, 100);
+        circles[i].setPosition(circleRigid.get_position().x + 20.0, circleRigid.get_position().y);
     }
 
-    
+    for (auto& c : circles) 
+    {
+        this->window->draw(c);
+    };
 }
