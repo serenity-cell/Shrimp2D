@@ -7,7 +7,7 @@
 #include <cmath>          // for std::abs
 
 
-void solver::applyGravity(circle& body)
+void solver::applyGravity(circleBody& body)
 {
     body.add_acceleration(gravity);
 }
@@ -50,7 +50,7 @@ float solver::impulse(float normalVelocity, float epsilon, float massA, float ma
     return -(1 + epsilon) * normalVelocity / (1 / massA + 1 / massB);
 }
 
-void solver::resolveCollision (circle& bodyA, circle& bodyB)
+void solver::resolveCollision (circleBody& bodyA, circleBody& bodyB)
 {
     glm::vec2 normal = collisionNormal(bodyA.position, bodyB.position);
     glm::vec2 relVel = relativeVelocity(bodyA.velocity, bodyB.velocity);

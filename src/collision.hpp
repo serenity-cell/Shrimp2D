@@ -13,7 +13,7 @@ class solver
 
     public:
 
-    void applyGravity(circle& body);
+    void applyGravity(circleBody& body);
     
     // math formulas used for checking collision
     float dotProduct(const glm::vec2& objectA, const glm::vec2& objectB);
@@ -31,6 +31,6 @@ class solver
 
     float impulse(float normalVelocity, float epsilon, float massA, float massB);
 
-    void resolveCollision (circle& bodyA, circle& bodyB);
+    void resolveCollision (circleBody& bodyA, circleBody& bodyB);
 
 };
