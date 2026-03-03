@@ -1,20 +1,19 @@
 #include "physicsWorld.hpp"
-#include "rigidBody.hpp"
 
 
 void physicsWorld::run()
 {
     this->initWindow();
-    
-    circle CircleBody;
-    // draw anything here
-    
-    
-        
     while (this->window->isOpen())
-    {
-        static sf::CircleShape circle(CircleBody.radius);
-        //circle.setPosition();
+    {  
+        std::vector<sf::CircleShape> circles(3);
+        for (int i = 0; i < 3; i++) 
+        {
+
+            circles[i].setRadius(circleRigid.radius);
+            circles[i].setPosition(100 * i + 100, 100);
+        }
+
         // update deltaTime
         this->updateDeltaTime();
 
@@ -26,7 +25,10 @@ void physicsWorld::run()
 
         // render the current state
         this->window->clear();
-        this->window->draw(circle);
+        for (auto& c : circles) 
+        {
+            this->window->draw(c);
+        };
         this->window->display();
     }
 }
@@ -49,7 +51,10 @@ void physicsWorld::updateSFMLEvents()
 void physicsWorld::updateDeltaTime()
 {
     // update the deltaTime variable with the time it takes to render a frame
-    this->deltaTime = this->dtClock.restart().asSeconds();
+    sf::Time dt = deltaTimeInnit.restart();
+    float deltaTime = dt.asMilliseconds();
+    //update position with the deltatime
+    circleRigid.update_position(deltaTime);
 }
 
 void physicsWorld::initWindow()
@@ -60,4 +65,12 @@ void physicsWorld::initWindow()
 
 void physicsWorld::render()
 {
+   std::vector<sf::CircleShape> circles(4);
+    for (int i = 0; i < 4; i++) 
+    {
+        circles[i].setRadius(circleRigid.radius);
+        circles[i].setPosition(100 * i + 100, 100);
+    }
+
+    
 }

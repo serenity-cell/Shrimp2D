@@ -1,5 +1,6 @@
 #pragma once
 #include "rigidBody.hpp"
+#include "collision.hpp"
 
 // SFML types used by physicsWorld
 #include <SFML/Graphics.hpp>
@@ -35,6 +36,9 @@ class physicsWorld
         void initWindow();
 
     public:
+        circleBody circleRigid;
+        static sf::CircleShape circle;
+        sf::Clock deltaTimeInnit;
         //PhysicsWorld();
         //virtual ~PhysicsWorld();
 
@@ -44,7 +48,7 @@ class physicsWorld
         void updateDeltaTime();
         // updating SFML on PhysicsWorld loop
         void updateSFMLEvents();
-        //void update();
+        void update();
         void render();
         // running PhysicsWorld
         void run();
