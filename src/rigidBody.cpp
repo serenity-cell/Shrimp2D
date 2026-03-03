@@ -1,25 +1,26 @@
 #include "rigidBody.hpp"
 
-circle::circle(){}
+circleBody::circleBody(){}
 
 // construct with an initial position (defaults to origin)
-circle::circle(const glm::vec2& initPos = glm::vec2(0.0f))
+circleBody::circleBody(const glm::vec2& initPos = glm::vec2(0.0f))
     : position(initPos),
         acceleration(0.0f){}
 
 // convenience overload
-circle::circle(float x, float y)
-    : circle(glm::vec2(x, y))
+circleBody::circleBody(float x, float y)
+    : circleBody(glm::vec2(x, y))
 {}
 
 //--main code--
-glm::vec2 circle::get_position() const
+glm::vec2 circleBody::get_position() const
 {
+
     return position;
 }
 
 //adds acce1leration to the current position, then resets acceleration to zero
-void circle::update_position(float deltaTime)
+void circleBody::update_position(float deltaTime)
 {
     const glm::vec2 velocity = position * deltaTime;
     position = position;
@@ -28,7 +29,3 @@ void circle::update_position(float deltaTime)
     acceleration = {};
 }
 
-void circle::add_acceleration(const glm::vec2& accel)
-{   
-    acceleration += accel;
-}

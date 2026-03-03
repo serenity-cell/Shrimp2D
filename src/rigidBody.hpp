@@ -1,21 +1,23 @@
 #pragma once
 #include "glm/glm.hpp"
 
-class circle
+class circleBody 
 {   
     public:
+    // basic foundation for the circle
     glm::vec2 position;
     glm::vec2 velocity;
     glm::vec2 acceleration;
     float mass;
+    float radius = 6.0;
 
-    float radius = 10.0;
+
     // construct with an initial position (defaults to origin)
-    circle(const glm::vec2& initPos);
+    circleBody(const glm::vec2& initPos);
     // convenience overload
-    circle(float x, float y);
+    circleBody(float x, float y);
 
-    circle();
+    circleBody();
 
     //--main code--
     glm::vec2 get_position() const;
