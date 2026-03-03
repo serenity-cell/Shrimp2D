@@ -13,7 +13,7 @@ void physicsWorld::run()
         this->updateSFMLEvents();
 
         // update the current state
-        //this->update();
+        this->update();
 
         // render the current state
         this->window->clear();
@@ -67,3 +67,9 @@ void physicsWorld::render()
         this->window->draw(c);
     };
 }
+
+void physicsWorld::update()
+{
+    circleRigid.update_position(deltaTime);
+}
+

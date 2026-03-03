@@ -25,7 +25,7 @@ class physicsWorld
 
         // dt or delta time keeps track of how long it takes
         // to render a frame
-        sf::Clock dtClock;
+        sf::Clock deltaTimeInnit;
         float deltaTime;
 
         // keyboard keys are int data type as the keyboard in sf
@@ -34,11 +34,14 @@ class physicsWorld
 
         //initializing the window and states
         void initWindow();
+        circleBody circleRigid;
+        solver Physics;
+        static sf::CircleShape circle;
+
 
     public:
-        circleBody circleRigid;
-        static sf::CircleShape circle;
-        sf::Clock deltaTimeInnit;
+        
+        
         //PhysicsWorld();
         //virtual ~PhysicsWorld();
 
