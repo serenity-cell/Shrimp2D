@@ -12,6 +12,7 @@
 #include <map>
 #include <stack>
 #include <vector>
+#include <iostream>
 
 
 #ifndef PHYSICSWORLD_HPP
@@ -26,7 +27,7 @@ class physicsWorld
         // dt or delta time keeps track of how long it takes
         // to render a frame
         sf::Clock deltaTimeInnit;
-        float deltaTime;
+        float deltaTime = 0.f;
 
         // keyboard keys are int data type as the keyboard in sf
         // is defined as an enum
@@ -34,14 +35,12 @@ class physicsWorld
 
         //initializing the window and states
         void initWindow();
-        circleBody circleRigid;
-        solver Physics;
+        
+        circleBody circlePosition = circleBody(0.f, 0.f);
+        solver physics;
         static sf::CircleShape circle;
 
-
     public:
-        
-        
         //PhysicsWorld();
         //virtual ~PhysicsWorld();
 

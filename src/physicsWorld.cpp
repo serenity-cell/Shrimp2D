@@ -13,7 +13,7 @@ void physicsWorld::run()
         this->updateSFMLEvents();
 
         // update the current state
-        //this->update();
+        this->update();
 
         // render the current state
         this->window->clear();
@@ -23,8 +23,7 @@ void physicsWorld::run()
 }
 
 void physicsWorld::updateSFMLEvents()
-{   this->sfEvent;
-
+{
     while (this->window->pollEvent(sfEvent))
         {
             // Close window: exit
@@ -32,34 +31,35 @@ void physicsWorld::updateSFMLEvents()
                 this->window->close();
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 this->window->close();
-
         }
-
 }
 
+// restarts and re-initializes the deltaTime
 void physicsWorld::updateDeltaTime()
 {
     // update the deltaTime variable with the time it takes to render a frame
     sf::Time dt = deltaTimeInnit.restart();
-    float deltaTime = dt.asMilliseconds();
+    deltaTime = dt.asSeconds();
 }
 
-//initites the window at a resolution of 800, 600
+// initites the window at a resolution of 800, 600
 void physicsWorld::initWindow()
 {
-    this->window = new sf::RenderWindow(sf::VideoMode({800, 600}), "Shrimp2D");
+this->window = new sf::RenderWindow(sf::VideoMode({800, 600}), "Shrimp2D");
 }
 
+// renders the shapes onto the window
 void physicsWorld::render()
 {  
     int totalCircles = 6; // quanitiy of circles to render here
 
     // renders multiple 
     std::vector<sf::CircleShape> circles(totalCircles);
-    for (float i = 0; i < totalCircles; i++) 
+    for (int i = 0; i < totalCircles; i++) 
     {
-        circles[i].setRadius(circleRigid.radius);
-        circles[i].setPosition(circleRigid.get_position().x + 20 * i, circleRigid.get_position().y);
+        circles[i].setRadius(circlePosition.radius);
+        circles[i].setPosition(circlePosition.getPosition().x + 60.f * i, circlePosition.getPosition().y);
+        //std::cout << circlePosition.getPosition().x + 60.f * i << ", " << circlePosition.getPosition().y << std::endl;
     }
 
     for (auto& c : circles) 
@@ -68,8 +68,19 @@ void physicsWorld::render()
     };
 }
 
+//updates all outside functions
 void physicsWorld::update()
-{
-    circleRigid.update_position(deltaTime);
+{   
+    
+    circlePosition.update_position(deltaTime);
+    physics.applyGravity(circlePosition);
+    std::cout << "pos: " << circlePosition.getPosition().y << " vel: " << circlePosition.velocity.y << " dt: " << deltaTime << std::endl;
+   
+    if (circlePosition.getPosition().y + circlePosition.radius >= 590.f)
+    {
+        physics.resolveGround(circlePosition, 590.0f);
+        std::cout << "rendering at: " << circlePosition.getPosition().y << std::endl;
+    }
+    
 }
 
