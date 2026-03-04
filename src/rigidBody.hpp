@@ -6,12 +6,12 @@ class circleBody
     public:
     // basic foundation for the circle
     glm::vec2 position;
-    glm::vec2 velocity;
+    glm::vec2 velocity = glm::vec2(0.f);
     glm::vec2 acceleration;
     float mass;
 
     // radius
-    float radius = 6.0;
+    float radius = 6.0f;
 
 
     // construct with an initial position (defaults to origin)
@@ -22,7 +22,9 @@ class circleBody
     circleBody();
 
     //--main code--
-    glm::vec2 get_position() const;
+    glm::vec2 getPosition() const;
+
+    void setPosition(const glm::vec2& pos);
 
     //adds acce1leration to the current position, then resets acceleration to zero
     void update_position(float deltaTime);
