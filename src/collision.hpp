@@ -12,6 +12,12 @@ class solver
     // implements gravity upon the rigidBody
     glm::vec2 gravity = glm::vec2(0.0f, 98.1f);
 
+    // declerations for resolveCollision function
+    glm::vec2 normal;
+    glm::vec2 relVel;
+    float normVel;
+    float j;
+
 
     public:
 
