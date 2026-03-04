@@ -1,15 +1,18 @@
 #include "collision.hpp"
 
-
-#pragma once
-#include "rigidBody.hpp"
-#include "glm/glm.hpp"
-#include <cmath>          // for std::abs
-
-
 void solver::applyGravity(circleBody& body)
 {
     body.add_acceleration(gravity);
+}
+
+void solver::resolveGround(circleBody& body, float groundY)
+{
+    if (body.position.y + body.radius >= groundY)
+    {
+        std::cout << "clamping to: " << groundY - body.radius << std::endl;
+        body.position.y = groundY - body.radius;
+        body.velocity.y *= -epsilon;
+    }
 }
 
 bool solver::isColliding(const glm::vec2& a, const glm::vec2& b, const int radiusA, const int radiusB)

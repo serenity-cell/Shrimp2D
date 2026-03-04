@@ -1,20 +1,24 @@
 #pragma once
 #include "rigidBody.hpp"
 #include "glm/glm.hpp"
-#include <cmath>          // for std::abs
+#include <iostream>
+#include <cmath>            // for std::abs
 
 class solver
 {   
     private: 
-    float epsilon = 1.0f;
+    float epsilon = 0.5f;
+    
     // implements gravity upon the rigidBody
-    glm::vec2 gravity = glm::vec2(0.0f, -9.81f);
+    glm::vec2 gravity = glm::vec2(0.0f, 98.1f);
 
 
     public:
 
     void applyGravity(circleBody& body);
     
+    void resolveGround(circleBody& body, float groundY);
+
     // math formulas used for checking collision
     float dotProduct(const glm::vec2& objectA, const glm::vec2& objectB);
 
