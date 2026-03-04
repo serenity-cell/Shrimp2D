@@ -7,8 +7,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 
-
-#include <iostream>
+//  extra libraries
 #include <map>
 #include <stack>
 #include <vector>
@@ -27,6 +26,7 @@ class physicsWorld
         // dt or delta time keeps track of how long it takes
         // to render a frame
         sf::Clock deltaTimeInnit;
+        sf::Time dtSeconds;
         float deltaTime = 0.f;
 
         // keyboard keys are int data type as the keyboard in sf
@@ -35,12 +35,19 @@ class physicsWorld
 
         //initializing the window and states
         void initWindow();
-        
+
         circleBody circlePosition = circleBody(0.f, 0.f);
         solver physics;
         static sf::CircleShape circle;
 
+        
+
     public:
+
+        int totalCircles; // quantitiy of circles to render
+        // renders multiple circles
+        std::vector<sf::CircleShape> circleDrawn;
+
         //PhysicsWorld();
         //virtual ~PhysicsWorld();
 
