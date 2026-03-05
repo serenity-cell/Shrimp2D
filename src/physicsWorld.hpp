@@ -7,7 +7,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 
-//  extra libraries
+// extra libraries
 #include <map>
 #include <vector>
 
@@ -31,7 +31,7 @@ class physicsWorld
         // is defined as an enum
         std::map<std::string, int> supportedKeys;
 
-        //initializing the window and states
+        // initializing the window and states
         void initWindow();
 
         circleBody circlePosition = circleBody(0.f, 0.f);
@@ -48,12 +48,12 @@ class physicsWorld
         int totalCircles; // quantitiy of circles to render
         // renders multiple circles
         std::vector<sf::CircleShape> circleDrawn;
+        std::vector<circleBody> circleDrawnPosition;
 
-        //PhysicsWorld();
-        //virtual ~PhysicsWorld();
-
-        //void endApplication();
-
+        // physicsWorld();
+        void initCircles();
+        // void endApplication();
+        void updatePhysics();
         // reseting dt on PhysicsWorld loop
         void updateDeltaTime();
         // updating SFML on PhysicsWorld loop
