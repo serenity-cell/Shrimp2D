@@ -3,7 +3,7 @@
 circleBody::circleBody(){}
 
 // construct with an initial position (defaults to origin)
-circleBody::circleBody(const glm::vec2& initPos = glm::vec2(0.0f))
+circleBody::circleBody(const glm::vec2& initPos)
     : position(initPos),
         acceleration(0.0f){}
 

@@ -15,7 +15,7 @@ class circleBody
 
 
     // construct with an initial position (defaults to origin)
-    circleBody(const glm::vec2& initPos);
+    circleBody(const glm::vec2& initPos = glm::vec2(0.0f));
     // convenience overload
     circleBody(float x, float y);
 
