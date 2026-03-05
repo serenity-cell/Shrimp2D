@@ -1,6 +1,5 @@
 #pragma once
 #include "rigidBody.hpp"
-#include "glm/glm.hpp"
 #include <iostream>
 #include <cmath>            // for std::abs
 

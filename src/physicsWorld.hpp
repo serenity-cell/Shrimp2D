@@ -9,9 +9,7 @@
 
 //  extra libraries
 #include <map>
-#include <stack>
 #include <vector>
-#include <iostream>
 
 
 #ifndef PHYSICSWORLD_HPP
