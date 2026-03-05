@@ -2,6 +2,7 @@
 #include "rigidBody.hpp"
 #include <iostream>
 #include <cmath>            // for std::abs
+#include <glm/geometric.hpp>
 
 class solver
 {   

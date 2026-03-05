@@ -1,5 +1,8 @@
 #pragma once
-#include "glm/glm.hpp"
+#include <glm/vec2.hpp>
+#include <climits>
+#include <cfloat>
+#include <cassert>
 
 class circleBody 
 {   
