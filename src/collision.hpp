@@ -1,13 +1,12 @@
 #pragma once
 #include "rigidBody.hpp"
-#include <iostream>
 #include <cmath>            // for std::abs
 #include <glm/geometric.hpp>
 
 class solver
 {   
     private: 
-    float epsilon = 0.5f;
+    float epsilon = 1.0f;
     
     // implements gravity upon the rigidBody
     glm::vec2 gravity = glm::vec2(0.0f, 98.1f);

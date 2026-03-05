@@ -1,4 +1,5 @@
 #include "collision.hpp"
+#include <iostream>
 
 void solver::applyGravity(circleBody& body)
 {
