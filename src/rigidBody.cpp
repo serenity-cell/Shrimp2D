@@ -1,11 +1,8 @@
 #include "rigidBody.hpp"
 
-circleBody::circleBody(){}
+circleBody::circleBody(const glm::vec2& initPos) : position (initPos){}
 
 // construct with an initial position (defaults to origin)
-circleBody::circleBody(const glm::vec2& initPos)
-    : position(initPos),
-        acceleration(0.0f){}
 
 // convenience overload
 circleBody::circleBody(float x, float y)
