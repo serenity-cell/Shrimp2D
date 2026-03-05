@@ -38,6 +38,9 @@ class physicsWorld
         solver physics;
         static sf::CircleShape circle;
 
+        const unsigned int maxWidth = 800;
+        const unsigned int maxHeight = 600;
+
         
 
     public:

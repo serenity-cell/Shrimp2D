@@ -2,7 +2,7 @@
 #include <iostream>
 
 void physicsWorld::run()
-{
+{   
     this->initWindow();
     while (this->window->isOpen())
     {
@@ -45,7 +45,7 @@ void physicsWorld::updateDeltaTime()
 // initites the window at a resolution of 800, 600
 void physicsWorld::initWindow()
 {
-this->window = new sf::RenderWindow(sf::VideoMode({800, 600}), "Shrimp2D");
+this->window = new sf::RenderWindow(sf::VideoMode({maxWidth, maxHeight}), "Shrimp2D");
 }
 
 // renders the shapes onto the window
