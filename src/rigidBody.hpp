@@ -1,4 +1,3 @@
-#pragma once
 #include <cassert>
 #include <cfloat>
 #include <climits>
@@ -12,7 +11,7 @@ public:
   glm::vec2 position = glm::vec2(0.0, 0.0);
   glm::vec2 velocity = glm::vec2(0.0, 0.0);
   glm::vec2 acceleration = glm::vec2(0.0, 0.0);
-  float mass = 0.0;
+  float mass = 1.0;
 
   // radius
   float radius = 6.0f;
@@ -27,7 +26,7 @@ public:
 
   void setPosition(const glm::vec2 &pos);
 
-  // adds acce1leration to the current position, then resets acceleration to
+  // adds acceleration to the current position, then resets acceleration to
   // zero
   void update_position(float deltaTime);
 
