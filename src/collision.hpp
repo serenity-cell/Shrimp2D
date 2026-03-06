@@ -6,7 +6,7 @@
 class solver
 {   
     private: 
-    float epsilon = 1.0f;
+    float epsilon = 0.65f;
     
     // implements gravity upon the rigidBody
     glm::vec2 gravity = glm::vec2(0.0f, 98.1f);
