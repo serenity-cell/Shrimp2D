@@ -34,7 +34,7 @@ class physicsWorld
         // initializing the window and states
         void initWindow();
 
-        circleBody circlePosition = circleBody(0.f, 0.f);
+        circleBody circlePosition = circleBody(0.0, 0.0);
         solver physics;
         static sf::CircleShape circle;
 
