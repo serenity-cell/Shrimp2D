@@ -1,5 +1,4 @@
 #include "collision.hpp"
-#include <iostream>
 
 void solver::applyGravity(circleBody& body)
 {
@@ -11,7 +10,6 @@ void solver::resolveGround(circleBody& body, float groundY)
 {
     if (body.position.y + body.radius >= groundY)
     {
-        std::cout << "clamping to: " << groundY - body.radius << std::endl;
         body.position.y = groundY - body.radius;
         body.velocity.y *= -epsilon;
     }
