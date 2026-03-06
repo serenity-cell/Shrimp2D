@@ -1,6 +1,6 @@
 #include "physicsWorld.hpp"
 #include <SFML/System/Vector2.hpp>
-#include <iostream>
+//#include <iostream>
 
 void physicsWorld::run() {
   totalCircles = 6; // quantitiy of circles to render
@@ -77,6 +77,8 @@ void physicsWorld::updateGravity() {
 void physicsWorld::updateCollision() {
   // resolving the physics of every individuL
   for (int i = 0; i < totalCircles; i++) {
+    circleDrawnPosition[i].update_position(deltaTime);
+    physics.applyGravity(circleDrawnPosition[i]);
     // checks ground collision and implements ground resolution
     if (circleDrawnPosition[i].getPosition().y +
             circleDrawnPosition[i].radius >=
@@ -88,7 +90,7 @@ void physicsWorld::updateCollision() {
 
 // initializes all of the bodies positions to a certain location
 void physicsWorld::initCircles() {
-  // renders multiple circleDrawn
+  // initializes multiple bodies
   circleDrawn.resize(totalCircles);
   circleDrawnPosition.resize(totalCircles);
 
@@ -104,8 +106,6 @@ void physicsWorld::update() {
   this->updateDeltaTime();
 
   this->updateSFMLEvents();
-
-  this->update();
 
   this->updateGravity();
 
