@@ -10,9 +10,6 @@ void physicsWorld::run() {
     // main loop for every updating factor
   while (this->window->isOpen()) {
         this->update();
-
-        this->updatePhysics();
-
         // render the current state
         this->window->clear();
         this->render();
@@ -79,16 +76,15 @@ void physicsWorld::updateGravity() {
 
 
 // initializes all of the bodies positions to a certain location
-void physicsWorld::initCircles()
-{
+void physicsWorld::initCircles() {
     // renders multiple circleDrawn
     circleDrawn.resize(totalCircles);
     circleDrawnPosition.resize(totalCircles);
 
-    for (int i = 0; i < totalCircles; i++) 
-    {
-        circleDrawnPosition[i].setPosition(glm::vec2(i * 80.f + 50.f, i * 80.f + 50.f ));
-        circleDrawn[i].setPosition (i * 80.f + 50.f, i * 80 + 50);
+  for (int i = 0; i < totalCircles; i++) {
+    circleDrawnPosition[i].setPosition(
+        glm::vec2(i * 80.f + 50.f, i * 80.f + 50.f));
+    circleDrawn[i].setPosition(i * 80.f + 50.f, i * 80 + 50);
     }
 }
 
