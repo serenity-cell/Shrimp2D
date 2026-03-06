@@ -11,7 +11,7 @@ void solver::resolveGround(circleBody &body, float groundY) {
 }
 
 bool solver::isColliding(const glm::vec2 &a, const glm::vec2 &b,
-                         const int radiusA, const int radiusB) {
+                         float radiusA, float radiusB) {
   float sumX = b.x - a.x;
   float sumY = b.y - a.y;
   float r = radiiSum(radiusA, radiusB);
@@ -24,7 +24,7 @@ float solver::dotProduct(const glm::vec2 &a, const glm::vec2 &b) {
   return a.x * b.x + a.y * b.y;
 }
 
-float solver::radiiSum(const int radiusA, const int radiusB) {
+float solver::radiiSum(float radiusA, float radiusB) {
   return radiusA + radiusB;
 }
 
