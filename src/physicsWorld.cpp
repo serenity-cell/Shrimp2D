@@ -3,7 +3,7 @@
 //#include <iostream>
 
 void physicsWorld::run() {
-  totalCircles = 6; // quantitiy of circles to render
+  totalCircles = 40; // quantitiy of circles to render
   this->initWindow();
   this->initCircles();
 
@@ -74,7 +74,7 @@ void physicsWorld::updateGravity() {
   }
 }
 
-void physicsWorld::updateCollision() {
+void physicsWorld::updateCollisionOnWindow() {
   // resolving the physics of every individuL
   for (int i = 0; i < totalCircles; i++) {
     circleDrawnPosition[i].update_position(deltaTime);
@@ -90,15 +90,19 @@ void physicsWorld::updateCollision() {
 
 // initializes all of the bodies positions to a certain location
 void physicsWorld::initCircles() {
-  // initializes multiple bodies
-  circleDrawn.resize(totalCircles);
-  circleDrawnPosition.resize(totalCircles);
+    // initializes multiple bodies
+    circleDrawn.resize(totalCircles);
+    circleDrawnPosition.resize(totalCircles);
 
-  for (int i = 0; i < totalCircles; i++) {
-    circleDrawnPosition[i].setPosition(
-        glm::vec2(i * 80.f + 50.f, i * 80.f + 50.f));
-    circleDrawn[i].setPosition(i * 80.f + 50.f, i * 80 + 50);
-  }
+    float radius = 200.f;
+    float cx = 400.f, cy = 300.f; // center of screen
+    for (int i = 0; i < totalCircles; i++) {
+        float angle = (2 * M_PI / totalCircles) * i;
+        float x = cx + radius * cos(angle);
+        float y = cy + radius * sin(angle);
+        circleDrawn[i].setPosition(x, y);
+        circleDrawnPosition[i].setPosition(glm::vec2(x, y));
+    }
 }
 
 // updates all outside functions
@@ -109,5 +113,5 @@ void physicsWorld::update() {
 
   this->updateGravity();
 
-  this->updateCollision();
+  this->updateCollisionOnWindow();
 }
