@@ -8,12 +8,7 @@ void physicsWorld::run() {
   this->initCircles();
 
     // main loop for every updating factor
-    while (this->window->isOpen())
-    {
-        this->updateDeltaTime();
-
-        this->updateSFMLEvents();
-
+  while (this->window->isOpen()) {
         this->update();
 
         this->updatePhysics();
@@ -97,7 +92,15 @@ void physicsWorld::initCircles()
     }
 }
 
-//updates all outside functions
-void physicsWorld::update()
-{  
+// updates all outside functions
+void physicsWorld::update() {
+  this->updateDeltaTime();
+
+  this->updateSFMLEvents();
+
+  this->update();
+
+  this->updateGravity();
+
+  this->updateCollision();
 }
