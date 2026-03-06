@@ -1,4 +1,5 @@
 #include "rigidBody.hpp"
+#include <glm/ext/vector_float2.hpp>
 
 circleBody::circleBody(const glm::vec2& initPos) : position (initPos){}
 
@@ -6,7 +7,7 @@ circleBody::circleBody(const glm::vec2& initPos) : position (initPos){}
 
 // convenience overload
 circleBody::circleBody(float x, float y)
-    : circleBody(glm::vec2(0.f, 0.f))
+    : circleBody(glm::vec2(x, y))
 {}
 
 //--main code--
