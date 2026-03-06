@@ -7,25 +7,25 @@ void physicsWorld::run() {
   this->initWindow();
   this->initCircles();
 
-    // main loop for every updating factor
+  // main loop for every updating factor
   while (this->window->isOpen()) {
-        this->update();
-        // render the current state
-        this->window->clear();
-        this->render();
-        this->window->display();
-    }
+    this->update();
+    // render the current state
+    this->window->clear();
+    this->render();
+    this->window->display();
+  }
 }
 
 // updates any input made by the user
 void physicsWorld::updateSFMLEvents() {
   while (this->window->pollEvent(sfEvent)) {
-            // Close window: exit
-            if (sfEvent.type == sf::Event::Closed)
-                this->window->close();
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-                this->window->close();
-        }
+    // Close window: exit
+    if (sfEvent.type == sf::Event::Closed)
+      this->window->close();
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+      this->window->close();
+  }
 }
 
 // restarts and re-initializes the deltaTime
@@ -88,15 +88,15 @@ void physicsWorld::updateCollision() {
 
 // initializes all of the bodies positions to a certain location
 void physicsWorld::initCircles() {
-    // renders multiple circleDrawn
-    circleDrawn.resize(totalCircles);
-    circleDrawnPosition.resize(totalCircles);
+  // renders multiple circleDrawn
+  circleDrawn.resize(totalCircles);
+  circleDrawnPosition.resize(totalCircles);
 
   for (int i = 0; i < totalCircles; i++) {
     circleDrawnPosition[i].setPosition(
         glm::vec2(i * 80.f + 50.f, i * 80.f + 50.f));
     circleDrawn[i].setPosition(i * 80.f + 50.f, i * 80 + 50);
-    }
+  }
 }
 
 // updates all outside functions
