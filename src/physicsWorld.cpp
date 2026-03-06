@@ -74,6 +74,17 @@ void physicsWorld::updateGravity() {
   }
 }
 
+void physicsWorld::updateCollision() {
+  // resolving the physics of every individuL
+  for (int i = 0; i < totalCircles; i++) {
+    // checks ground collision and implements ground resolution
+    if (circleDrawnPosition[i].getPosition().y +
+            circleDrawnPosition[i].radius >=
+        maxHeight - 6) {
+      physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
+    }
+  }
+}
 
 // initializes all of the bodies positions to a certain location
 void physicsWorld::initCircles() {
