@@ -43,10 +43,9 @@ public:
   std::vector<sf::CircleShape> circleDrawn;
   std::vector<circleBody> circleDrawnPosition;
 
-  // physicsWorld();
   void initCircles();
-  // void endApplication();
-  void updatePhysics();
+  void updateGravity();
+  void updateCollision();
   // reseting dt on PhysicsWorld loop
   void updateDeltaTime();
   // updating SFML on PhysicsWorld loop
