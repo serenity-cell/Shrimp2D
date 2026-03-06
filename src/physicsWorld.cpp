@@ -4,6 +4,7 @@
 
 void physicsWorld::run()
 {   
+    totalCircles = 3; // quantitiy of circles to render
     this->initWindow();
     this->initCircles();
     while (this->window->isOpen())
@@ -55,7 +56,6 @@ this->window = new sf::RenderWindow(sf::VideoMode({maxWidth, maxHeight}), "Shrim
 // renders the shapes onto the window
 void physicsWorld::render()
 {  
-    totalCircles = 6; // quantitiy of circles to render
     // renders multiple circleDrawn
     circleDrawn.resize(totalCircles);
     for (auto& c : circleDrawn)
@@ -69,32 +69,31 @@ void physicsWorld::updatePhysics()
     // resolving the physics of every individuL 
     for (int i = 0; i < totalCircles; i++) 
     {
-
         circleDrawn[i].setRadius(circleDrawnPosition[i].radius);
-        circleDrawn[i].setPosition(circleDrawnPosition[i].getPosition().x, circleDrawnPosition[i].getPosition().y);
+        circleDrawn[i].setPosition(circleDrawnPosition[i].getPosition().x , circleDrawnPosition[i].getPosition().y);
+
         circleDrawnPosition[i].update_position(deltaTime);
         physics.applyGravity(circleDrawnPosition[i]);
-        std::cout << "pos: " << circleDrawnPosition[i].getPosition().y << " vel: " << circleDrawnPosition[i].velocity.y << " dt: " << deltaTime << std::endl;
+        std::cout << i << " pos: " << circleDrawnPosition[i].getPosition().x << " | "<<circleDrawnPosition[i].getPosition().y << " vel: " << circleDrawnPosition[i].velocity.y << " dt: " << deltaTime << std::endl;
         
         // checks ground collision and implements ground resolution
         if (circleDrawnPosition[i].getPosition().y + circleDrawnPosition[i].radius >= maxHeight - 6)
         {
             physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
-            std::cout << "rendering at: " << circleDrawnPosition[i].getPosition().y << std::endl;
         }
     }
 }
 
 void physicsWorld::initCircles()
 {
-    totalCircles = 6; // quantitiy of circles to render
     // renders multiple circleDrawn
     circleDrawn.resize(totalCircles);
     circleDrawnPosition.resize(totalCircles);
 
-    for (int i = 0; i < totalCircles; i++) 
+    for (int i = 1; i < totalCircles; i++) 
     {
-        circleDrawn[i].setPosition (i * 80.f + 50.f, i * 80 + 50);
+        circleDrawnPosition[i].setPosition(glm::vec2(i * 80.f + 30.f, i * 80.f + 50.f ));
+        circleDrawn[i].setPosition (i * 80.f + 30.f, i * 80 + 50);
     }
 }
 
@@ -102,4 +101,3 @@ void physicsWorld::initCircles()
 void physicsWorld::update()
 {   
 }
-
