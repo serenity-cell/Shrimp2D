@@ -22,9 +22,6 @@ protected:
   sf::Clock deltaTimeInnit;
   sf::Time dtSeconds;
   float deltaTime = 0.f;
-
-  // keyboard keys are int data type as the keyboard in sf
-  // is defined as an enum
   std::map<std::string, int> supportedKeys;
 
   // initializing the window and states
@@ -45,7 +42,9 @@ public:
 
   void initCircles();
   void updateGravity();
-  void updateCollision();
+  void updateWindowCollision();
+  void updateCircleCollision();
+  void checkCollision();
   // reseting dt on PhysicsWorld loop
   void updateDeltaTime();
   // updating SFML on PhysicsWorld loop
