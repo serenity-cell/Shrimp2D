@@ -2,16 +2,17 @@
 #include <glm/ext/vector_float2.hpp>
 
 circleBody::circleBody(const glm::vec2 &initPos) : position(initPos) {}
-
-// construct with an initial position (defaults to origin)
-
 // convenience overload
 circleBody::circleBody(float x, float y) : circleBody(glm::vec2(x, y)) {}
 
 //--main code--
-glm::vec2 circleBody::getPosition() const { return position; }
+glm::vec2 circleBody::getPosition() const { 
+  return position; 
+}
 
-void circleBody::setPosition(const glm::vec2 &pos) { position = pos; }
+void circleBody::setPosition(const glm::vec2 &pos) {
+  position = pos; 
+}
 
 void circleBody::add_acceleration(const glm::vec2 &accel) {
   acceleration += accel;
