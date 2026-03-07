@@ -3,29 +3,29 @@
 //#include <iostream>
 
 void physicsWorld::run() {
-  totalCircles = 40; // quantitiy of circles to render
-  this->initWindow();
-  this->initCircles();
+    totalCircles = 40; // quantitiy of circles to render
+    this->initWindow();
+    this->initCircles();
 
-  // main loop for every updating factor
-  while (this->window->isOpen()) {
-    this->update();
-    // render the current state
-    this->window->clear();
-    this->render();
-    this->window->display();
-  }
+    // main loop for every updating factor
+    while (this->window->isOpen()) {
+        this->update();
+        // render the current state
+        this->window->clear();
+        this->render();
+        this->window->display();
+    }
 }
 
 // updates any input made by the user
 void physicsWorld::updateSFMLEvents() {
-  while (this->window->pollEvent(sfEvent)) {
-    // Close window: exit
-    if (sfEvent.type == sf::Event::Closed)
-      this->window->close();
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-      this->window->close();
-  }
+    while (this->window->pollEvent(sfEvent)) {
+        // Close window: exit
+        if (sfEvent.type == sf::Event::Closed)
+        this->window->close();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        this->window->close();
+    }
 }
 
 // restarts and re-initializes the deltaTime
@@ -37,55 +37,59 @@ void physicsWorld::updateDeltaTime() {
 
 // initites the window at a resolution of 800, 600
 void physicsWorld::initWindow() {
-  this->window =
-      new sf::RenderWindow(sf::VideoMode({maxWidth, maxHeight}), "Shrimp2D");
+    this->window =
+    new sf::RenderWindow(sf::VideoMode({maxWidth, maxHeight}), "Shrimp2D");
 }
 
 // renders the bodies onto the window
 void physicsWorld::render() {
-  for (int i = 0; i < totalCircles; i++) {
-    circleDrawn[i].setRadius(circleDrawnPosition[i].radius);
-    circleDrawn[i].setPosition(circleDrawnPosition[i].getPosition().x,
-                               circleDrawnPosition[i].getPosition().y);
-  }
-  // renders multiple circleDrawn
-  circleDrawn.resize(totalCircles);
-  for (auto &c : circleDrawn) {
-    this->window->draw(c);
-  };
+    for (int i = 0; i < totalCircles; i++) {
+        circleDrawn[i].setRadius(circleDrawnPosition[i].radius);
+        circleDrawn[i].setPosition(circleDrawnPosition[i].getPosition().x,
+                                circleDrawnPosition[i].getPosition().y);
+    }
+    // renders multiple circleDrawn
+    circleDrawn.resize(totalCircles);
+    for (auto &c : circleDrawn) {
+        this->window->draw(c);
+    };
 }
 
 // gives each individual body its own physics
 void physicsWorld::updateGravity() {
-  // resolving the physics of every individuL
-  for (int i = 0; i < totalCircles; i++) {
-    circleDrawnPosition[i].update_position(deltaTime);
-    physics.applyGravity(circleDrawnPosition[i]);
-    // std::cout << i << " pos: " << circleDrawnPosition[i].getPosition().x << "
-    // | "<<circleDrawnPosition[i].getPosition().y << " vel: " <<
-    // circleDrawnPosition[i].velocity.y << " dt: " << deltaTime << std::endl;
+    // resolving the physics of every individuL
+    for (int i = 0; i < totalCircles; i++) {
+        circleDrawnPosition[i].update_position(deltaTime);
+        physics.applyGravity(circleDrawnPosition[i]);
+        // std::cout << i << " pos: " << circleDrawnPosition[i].getPosition().x << "
+        // | "<<circleDrawnPosition[i].getPosition().y << " vel: " <<
+        // circleDrawnPosition[i].velocity.y << " dt: " << deltaTime << std::endl;
 
-    // checks ground collision and implements ground resolution
-    if (circleDrawnPosition[i].getPosition().y +
-            circleDrawnPosition[i].radius >=
-        maxHeight - 6) {
-      physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
+        // checks ground collision and implements ground resolution
+        if (circleDrawnPosition[i].getPosition().y +
+                circleDrawnPosition[i].radius >=
+            maxHeight - 6) {
+        physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
+        }
     }
-  }
 }
 
-void physicsWorld::updateCollisionOnWindow() {
-  // resolving the physics of every individuL
-  for (int i = 0; i < totalCircles; i++) {
-    circleDrawnPosition[i].update_position(deltaTime);
-    physics.applyGravity(circleDrawnPosition[i]);
-    // checks ground collision and implements ground resolution
-    if (circleDrawnPosition[i].getPosition().y +
-            circleDrawnPosition[i].radius >=
-        maxHeight - 6) {
-      physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
+void physicsWorld::updateCircleCollision() {
+
+}
+
+// resolving the physics of every individual body 
+void physicsWorld::updateWindowCollision() {
+    for (int i = 0; i < totalCircles; i++) {
+        circleDrawnPosition[i].update_position(deltaTime);
+        physics.applyGravity(circleDrawnPosition[i]);
+        // checks ground collision and implements ground resolution
+        if (circleDrawnPosition[i].getPosition().y +
+                circleDrawnPosition[i].radius >=
+            maxHeight - 6) {
+        physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
+        }
     }
-  }
 }
 
 // initializes all of the bodies positions to a certain location
@@ -107,11 +111,13 @@ void physicsWorld::initCircles() {
 
 // updates all outside functions
 void physicsWorld::update() {
-  this->updateDeltaTime();
+    this->updateDeltaTime();
 
-  this->updateSFMLEvents();
+    this->updateSFMLEvents();
 
-  this->updateGravity();
+    this->updateGravity();
 
-  this->updateCollisionOnWindow();
+    this->updateWindowCollision();
+
+    //this->updateCircleColision();
 }

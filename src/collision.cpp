@@ -15,9 +15,7 @@ bool solver::isColliding(const glm::vec2 &a, const glm::vec2 &b,
   float sumX = b.x - a.x;
   float sumY = b.y - a.y;
   float r = radiiSum(radiusA, radiusB);
-  return r * r >=
-         sumX * sumX +
-             sumY * sumY; // we are checking the radii sum to the distance
+  return r * r >= sumX * sumX + sumY * sumY;
 }
 
 float solver::dotProduct(const glm::vec2 &a, const glm::vec2 &b) {
