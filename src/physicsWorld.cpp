@@ -76,7 +76,7 @@ void physicsWorld::updateGravity(int i) {
     }
 }
 
-void physicsWorld::updateCircleCollision() {
+void physicsWorld::updateCircleCollision(int i) {
 
 }
 
@@ -120,6 +120,8 @@ void physicsWorld::update() {
         this->updateGravity(i);
 
         this->updateWindowCollision(i);
-    }
-    //this->updateCircleColision();
+
+        //this->updateCircleColision();
 }
+    }
+    
