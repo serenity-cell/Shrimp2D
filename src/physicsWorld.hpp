@@ -14,11 +14,9 @@
 #define PHYSICSWORLD_HPP
 class physicsWorld {
 protected:
+  // SFML variables
   sf::RenderWindow *window;
   sf::Event sfEvent;
-
-  // dt or delta time keeps track of how long it takes
-  // to render a frame
   sf::Clock deltaTimeInnit;
   sf::Time dtSeconds;
   float deltaTime = 0.f;
@@ -34,17 +32,18 @@ protected:
   const unsigned int maxWidth = 800;
   const unsigned int maxHeight = 600;
 
-public:
+private:
   int totalCircles; // quantitiy of circles to render
   // renders multiple circles
   std::vector<sf::CircleShape> circleDrawn;
   std::vector<circleBody> circleDrawnPosition;
 
   void initCircles();
-  void updateGravity();
-  void updateWindowCollision();
-  void updateCircleCollision();
+  void updateGravity(int i);
+  void updateWindowCollision(int i);
+  void updateCircleCollision(int i);
   void checkCollision();
+  
   // reseting dt on PhysicsWorld loop
   void updateDeltaTime();
   // updating SFML on PhysicsWorld loop
