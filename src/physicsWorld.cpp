@@ -82,7 +82,7 @@ void physicsWorld::updateCircleCollision(int i) {
         glm::vec2 bodyA = circleDrawnPosition[i].getPosition();
         glm::vec2 bodyB = circleDrawnPosition[j].getPosition();
         if (physics.isColliding(bodyA, bodyB, circlePosition.radius, circlePosition.radius)) {
-           
+            physics.resolveCollision(circleDrawnPosition[i], circleDrawnPosition[j]);
         }
     }
 
@@ -93,10 +93,14 @@ void physicsWorld::updateCircleCollision(int i) {
 void physicsWorld::updateWindowCollision(int i) {  
     circleDrawnPosition[i].update_position(deltaTime);
     // checks ground collision and implements ground resolution
-    if (circleDrawnPosition[i].getPosition().y + circleDrawnPosition[i].radius >=
-        maxHeight - 6) {
+    // the minus six is to leave space for the circle to not go half way through the collision
+    if (circleDrawnPosition[i].getPosition().y + circleDrawnPosition[i].radius == maxHeight - 6) {
     physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
     }
+    if (circleDrawnPosition[i].getPosition().x + circleDrawnPosition[i].radius >= maxWidth - 6 || circleDrawnPosition[i].getPosition().x + circleDrawnPosition[i].radius <=  6) {
+        physics.resolveWall(circleDrawnPosition[i], maxWidth - 6);
+    }
+
 }
 
 void physicsWorld::updatePhysics(int i) {
@@ -106,12 +110,12 @@ void physicsWorld::updatePhysics(int i) {
 // initializes all of the bodies positions once
 void physicsWorld::initCircles() {
     // initializes the total of circles desired
-    totalCircles = 40; // quantitiy of circles to render
+    totalCircles = 120; // quantitiy of circles to render
     // initializes multiple bodies
     circleDrawn.resize(totalCircles);
     circleDrawnPosition.resize(totalCircles);
 
-    float radius = 200.f;
+    float radius = 300.f;
     float cx = 400.f, cy = 300.f; // center of screen
     for (int i = 0; i < totalCircles; i++) {
         float angle = (2 * M_PI / totalCircles) * i;
