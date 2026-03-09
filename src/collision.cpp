@@ -45,7 +45,6 @@ glm::vec2 solver::relativeVelocity(glm::vec2 velocityA, glm::vec2 velocityB) {
   return velocityB - velocityA;
 }
 
-
 // input returns into noremalVel
 float solver::normalVelocity(glm::vec2 relativeVelocity, glm::vec2 normal) {
   return glm::dot(relativeVelocity, normal);
@@ -56,14 +55,19 @@ float solver::impulse(float normalVelocity, float epsilon, float massA,
   return -(1 + epsilon) * normalVelocity / (1 / massA + 1 / massB);
 }
 
+// penetration correction
+void solver::penetrationCorrection(const glm::vec2 bodyA, const glm::vec2 bodyB, float radiusA, float radiusB) {
+
+}
+
 // collision check used between two circles (ONLY THIS NEEDS TO BE USED)
 void solver::resolveCollision(circleBody &bodyA, circleBody &bodyB) {
     normal = collisionNormal(bodyA.position, bodyB.position);
     relVel = relativeVelocity(bodyA.velocity, bodyB.velocity);
     float normVel = normalVelocity(relVel, normal);
 
-    // if (normVel > 0)
-    // return;
+    if (normVel > 0)
+    return;
 
     j = impulse(normVel, epsilon, bodyA.mass, bodyB.mass);
     bodyA.velocity -= (j / bodyA.mass) * normal;

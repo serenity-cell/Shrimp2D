@@ -33,9 +33,13 @@ public:
 
   float normalVelocity(glm::vec2 relativeVelocity, glm::vec2 normal);
 
+  void penetrationCorrection(const glm::vec2 bodyA, const glm::vec2 bodyB, float radiusA, float radiusB);  
+
   // gets the checks collision and if true, acts upon it accordingly
   bool isColliding(const glm::vec2 &objectA, const glm::vec2 &objectB,
                    const float radiusA, const float radiusB);
+
+
 
   float impulse(float normalVelocity, float epsilon, float massA, float massB);
 
