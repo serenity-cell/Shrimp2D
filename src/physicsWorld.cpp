@@ -23,7 +23,7 @@ void physicsWorld::updateSFMLEvents() {
         // Close window: exit
         if (sfEvent.type == sf::Event::Closed)
         this->window->close();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         this->window->close();
     }
 }
@@ -128,7 +128,7 @@ void physicsWorld::update() {
 
     this->updateSFMLEvents();
 
-    for (int i = 0; i <= totalCircles; i++) {
+    for (int i = 0; i < totalCircles; i++) {
         this->updateGravity(i);
 
         this->updateWindowCollision(i);
