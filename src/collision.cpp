@@ -10,8 +10,7 @@ void solver::resolveGround(circleBody &body, float groundY) {
   }
 }
 
-bool solver::isColliding(const glm::vec2 &a, const glm::vec2 &b,
-                         float radiusA, float radiusB) {
+bool solver::isColliding(const glm::vec2 &a, const glm::vec2 &b, float radiusA, float radiusB) {
   float sumX = b.x - a.x;
   float sumY = b.y - a.y;
   float r = radiiSum(radiusA, radiusB);
@@ -45,14 +44,14 @@ float solver::impulse(float normalVelocity, float epsilon, float massA,
 
 // collision check used between two circles
 void solver::resolveCollision(circleBody &bodyA, circleBody &bodyB) {
-  normal = collisionNormal(bodyA.position, bodyB.position);
-  relVel = relativeVelocity(bodyA.velocity, bodyB.velocity);
-  float normVel = normalVelocity(relVel, normal);
+    normal = collisionNormal(bodyA.position, bodyB.position);
+    relVel = relativeVelocity(bodyA.velocity, bodyB.velocity);
+    float normVel = normalVelocity(relVel, normal);
 
-  if (normVel > 0)
-    return; // already separating
+    if (normVel > 0)
+      return; // already separating
 
-  j = impulse(normVel, epsilon, bodyA.mass, bodyB.mass);
-  bodyA.velocity -= (j / bodyA.mass) * normal;
-  bodyB.velocity += (j / bodyB.mass) * normal;
+    j = impulse(normVel, epsilon, bodyA.mass, bodyB.mass);
+    bodyA.velocity -= (j / bodyA.mass) * normal;
+    bodyB.velocity += (j / bodyB.mass) * normal;
 }
