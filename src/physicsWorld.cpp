@@ -55,7 +55,7 @@ void physicsWorld::render() {
     // renders multiple circleDrawn
     for (auto &c : circleDrawn) {
         this->window->draw(c);
-    };
+    }
 }
 
 // gives each individual body its own physics
@@ -77,18 +77,30 @@ void physicsWorld::updateGravity(int i) {
 }
 
 void physicsWorld::updateCircleCollision(int i) {
+    circleDrawnPosition[i].update_position(deltaTime);
+    for (int j = i + 1; j < totalCircles; j++) {
+        glm::vec2 bodyA = circleDrawnPosition[i].getPosition();
+        glm::vec2 bodyB = circleDrawnPosition[j].getPosition();
+        if (physics.isColliding(bodyA, bodyB, circlePosition.radius, circlePosition.radius)) {
+           
+        }
+    }
+
 
 }
 
 // resolving the physics of every individual body 
-void physicsWorld::updateWindowCollision(int i) {        circleDrawnPosition[i].update_position(deltaTime);
-    physics.applyGravity(circleDrawnPosition[i]);
+void physicsWorld::updateWindowCollision(int i) {  
+    circleDrawnPosition[i].update_position(deltaTime);
     // checks ground collision and implements ground resolution
-    if (circleDrawnPosition[i].getPosition().y +
-            circleDrawnPosition[i].radius >=
+    if (circleDrawnPosition[i].getPosition().y + circleDrawnPosition[i].radius >=
         maxHeight - 6) {
     physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
     }
+}
+
+void physicsWorld::updatePhysics(int i) {
+    physics.applyGravity(circleDrawnPosition[i]);
 }
 
 // initializes all of the bodies positions once
@@ -121,7 +133,9 @@ void physicsWorld::update() {
 
         this->updateWindowCollision(i);
 
-        //this->updateCircleColision();
-}
+        this->updatePhysics(i);
+
+        this->updateCircleCollision(i);
     }
+}
     

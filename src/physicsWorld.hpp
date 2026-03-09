@@ -32,7 +32,7 @@ protected:
   const unsigned int maxWidth = 800;
   const unsigned int maxHeight = 600;
 
-private:
+public:
   int totalCircles; // quantitiy of circles to render
   // renders multiple circles
   std::vector<sf::CircleShape> circleDrawn;
@@ -42,7 +42,7 @@ private:
   void updateGravity(int i);
   void updateWindowCollision(int i);
   void updateCircleCollision(int i);
-  void checkCollision();
+  void updatePhysics(int i);
   
   // reseting dt on PhysicsWorld loop
   void updateDeltaTime();
