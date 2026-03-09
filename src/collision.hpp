@@ -20,7 +20,8 @@ public:
   void applyGravity(circleBody &body);
 
   void resolveGround(circleBody &body, float groundY);
-
+  
+  void resolveWall(circleBody &body, float groundX);
   // math formulas used for checking collision
   float dotProduct(const glm::vec2 &objectA, const glm::vec2 &objectB);
 
