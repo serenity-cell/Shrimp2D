@@ -110,12 +110,12 @@ void physicsWorld::updatePhysics(int i) {
 // initializes all of the bodies positions once
 void physicsWorld::initCircles() {
     // initializes the total of circles desired
-    totalCircles = 120; // quantitiy of circles to render
+    totalCircles = 40; // quantitiy of circles to render
     // initializes multiple bodies
     circleDrawn.resize(totalCircles);
     circleDrawnPosition.resize(totalCircles);
 
-    float radius = 300.f;
+    float radius = 80.f;
     float cx = 400.f, cy = 300.f; // center of screen
     for (int i = 0; i < totalCircles; i++) {
         float angle = (2 * M_PI / totalCircles) * i;
