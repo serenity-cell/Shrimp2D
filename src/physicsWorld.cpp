@@ -1,12 +1,10 @@
 #include "physicsWorld.hpp"
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
-//#include <iostream>
 
 void physicsWorld::run() {
     this->initWindow();
     this->initCircles();
-
     // main loop for every updating factor
     while (this->window->isOpen()) {
         this->update();
@@ -59,9 +57,8 @@ void physicsWorld::render() {
 }
 
 // gives each individual body its own physics
-void physicsWorld::updateGravity(int i) {
+void physicsWorld::applyForces(int i) {
     // resolving the physics of every individuL
-    circleDrawnPosition[i].update_position(deltaTime);
     physics.applyGravity(circleDrawnPosition[i]);
 
     // std::cout << i << " pos: " << circleDrawnPosition[i].getPosition().x << " | "
@@ -70,14 +67,12 @@ void physicsWorld::updateGravity(int i) {
 
     // checks ground collision and implements ground resolution
     if (circleDrawnPosition[i].getPosition().y +
-            circleDrawnPosition[i].radius >=
-        maxHeight - 6) {
+            circleDrawnPosition[i].radius >= maxHeight - 6) {
     physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
     }
 }
 
-void physicsWorld::updateCircleCollision(int i) {
-    circleDrawnPosition[i].update_position(deltaTime);
+void physicsWorld::solveCircleCollision(int i) {
     for (int j = i + 1; j < totalCircles; j++) {
         glm::vec2 bodyA = circleDrawnPosition[i].getPosition();
         glm::vec2 bodyB = circleDrawnPosition[j].getPosition();
@@ -90,32 +85,36 @@ void physicsWorld::updateCircleCollision(int i) {
 }
 
 // resolving the physics of every individual body 
-void physicsWorld::updateWindowCollision(int i) {  
-    circleDrawnPosition[i].update_position(deltaTime);
+void physicsWorld::solveWindowCollision(int i) {
+    
     // checks ground collision and implements ground resolution
     // the minus six is to leave space for the circle to not go half way through the collision
-    if (circleDrawnPosition[i].getPosition().y + circleDrawnPosition[i].radius == maxHeight - 6) {
-    physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
+    if (circleDrawnPosition[i].getPosition().y + circleDrawnPosition[i].radius >= maxHeight - 6) {
+        physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
     }
-    if (circleDrawnPosition[i].getPosition().x + circleDrawnPosition[i].radius >= maxWidth - 6 || circleDrawnPosition[i].getPosition().x + circleDrawnPosition[i].radius <=  6) {
+
+    if (circleDrawnPosition[i].getPosition().x + circleDrawnPosition[i].radius >= maxWidth - 6 || 
+        circleDrawnPosition[i].getPosition().x + circleDrawnPosition[i].radius <=  6) {
         physics.resolveWall(circleDrawnPosition[i], maxWidth - 6);
     }
 
 }
 
-void physicsWorld::updatePhysics(int i) {
-    physics.applyGravity(circleDrawnPosition[i]);
+void physicsWorld::updatePosition(int i) {
+    circleDrawnPosition[i].update_position(deltaTime);
 }
 
 // initializes all of the bodies positions once
 void physicsWorld::initCircles() {
     // initializes the total of circles desired
-    totalCircles = 40; // quantitiy of circles to render
+    totalCircles = 40;
+
     // initializes multiple bodies
     circleDrawn.resize(totalCircles);
     circleDrawnPosition.resize(totalCircles);
 
-    float radius = 80.f;
+    // intitializing the circle positions along the radius of a circle
+    float radius = 200.f;
     float cx = 400.f, cy = 300.f; // center of screen
     for (int i = 0; i < totalCircles; i++) {
         float angle = (2 * M_PI / totalCircles) * i;
@@ -133,13 +132,14 @@ void physicsWorld::update() {
     this->updateSFMLEvents();
 
     for (int i = 0; i < totalCircles; i++) {
-        this->updateGravity(i);
 
-        this->updateWindowCollision(i);
+        this->applyForces(i);
 
-        this->updatePhysics(i);
+        this->updatePosition(i); 
 
-        this->updateCircleCollision(i);
+        this->solveWindowCollision(i);
+
+        this->solveCircleCollision(i);
     }
 }
     
