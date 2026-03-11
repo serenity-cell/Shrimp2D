@@ -86,10 +86,9 @@ void physicsWorld::solveCircleCollision(int i) {
 
 // resolving the physics of every individual body 
 void physicsWorld::solveWindowCollision(int i) {
-    
     // checks ground collision and implements ground resolution
     // the minus six is to leave space for the circle to not go half way through the collision
-    if (circleDrawnPosition[i].getPosition().y + circleDrawnPosition[i].radius >= maxHeight - 6) {
+    if (circleDrawnPosition[i].getPosition().y + circleDrawnPosition[i].radius <= maxHeight - 6) {
         physics.resolveGround(circleDrawnPosition[i], maxHeight - 6);
     }
 
@@ -139,7 +138,7 @@ void physicsWorld::update() {
 
         this->solveWindowCollision(i);
 
-        this->solveCircleCollision(i);
+        //this->solveCircleCollision(i);
     }
 }
     
