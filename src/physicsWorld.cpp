@@ -76,7 +76,9 @@ void PhysicsWorld::solveCircleCollision(int i) {
     for (int j = i + 1; j < totalCircles; j++) {
         glm::vec2 bodyA = circleDrawnPosition[i].getPosition();
         glm::vec2 bodyB = circleDrawnPosition[j].getPosition();
-        if (Physics.isColliding(bodyA, bodyB, CirclePosition.radius, CirclePosition.radius)) {
+        const float rA = circleDrawnPosition[i].radius;
+        const float rB = circleDrawnPosition[j].radius;
+        if (Physics.isColliding(bodyA, bodyB, rA, rB)) {
             Physics.resolveCollision(circleDrawnPosition[i], circleDrawnPosition[j]);
         } 
     }
@@ -106,14 +108,14 @@ void PhysicsWorld::updatePosition(int i) {
 // initializes all of the bodies positions once
 void PhysicsWorld::initCircles() {
     // initializes the total of circles desired
-    totalCircles = 10;
+    totalCircles = 400;
 
     // initializes multiple bodies
     circleDrawn.resize(totalCircles);
     circleDrawnPosition.resize(totalCircles);
 
     // intitializing the circle positions along the radius of a circle
-    float radius = 100.f;
+    float radius = 200.f;
     float cx = 400.f, cy = 300.f; // center of screen
 
     // spawns circles along a radius
