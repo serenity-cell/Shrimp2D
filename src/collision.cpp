@@ -1,4 +1,5 @@
 #include "collision.hpp"
+#include <cmath>
 
 float slop = 0 ;
 
@@ -25,12 +26,22 @@ void solver::resolveWall(circleBody &body, float groundX) {
   }
 }
 
-bool solver::isColliding(const glm::vec2 &a, const glm::vec2 &b, float radiusA, float radiusB) {
-  float sumX = b.x - a.x;
-  float sumY = b.y - a.y;
-  float r = radiiSum(radiusA, radiusB);
-  return r * r >= sumX * sumX + sumY * sumY;
+
+
+bool solver::isColliding(const glm::vec2 &a, const glm::vec2 &b, const float radiusA, const float radiusB) {
+  sumX = b.x - a.x;
+  sumY = b.y - a.y;
+  radius_sum = radiiSum(radiusA, radiusB);
+  return radius_sum * radius_sum >= sumX * sumX + sumY * sumY;
 }
+
+float solver::checkDistance(const glm::vec2 &objectA, const glm::vec2 &objectB,  float radiusA,  float radiusB) {
+  sumX = objectB.x - objectA.x;
+  sumY = objectB.y - objectA.y;
+  return std::sqrt(sumX * sumX + sumY * sumY);
+}
+
+
 
 float solver::dotProduct(const glm::vec2 &a, const glm::vec2 &b) {
   return a.x * b.x + a.y * b.y;
@@ -40,7 +51,6 @@ float solver::radiiSum(float radiusA, float radiusB) {
   return radiusA + radiusB;
 }
 
-// use this two first
 glm::vec2 solver::collisionNormal(glm::vec2 objectA, glm::vec2 objectB) {
   return glm::normalize(objectA - objectB);
 }
@@ -58,35 +68,19 @@ float solver::impulse(float normalVelocity, float epsilon, float massA, float ma
   return -(1 + epsilon) * normalVelocity / (1 / massA + 1 / massB);
 }
 
-// penetration correction
-void solver::penetrationDepth(const glm::vec2 bodyA, const glm::vec2 bodyB, float radiusA, float radiusB) {
-  difference = bodyB - bodyA;
-  distance = glm::length(difference);
-
-  if (distance < radiusA + radiusB) {
-    normal = difference/ distance;
-  }
-  else {
-    normal = glm::vec2(1, 0);
-  }
-  float penetration = (radiusA - radiusB) - distance;
-  if (penetration > 0) {
-    return;
-  }
-}
-
-
-
 // collision check used between two circles (ONLY THIS NEEDS TO BE USED)
 void solver::resolveCollision(circleBody &bodyA, circleBody &bodyB) {
     normal = collisionNormal(bodyA.position, bodyB.position);
     relVel = relativeVelocity(bodyA.velocity, bodyB.velocity);
     float normVel = normalVelocity(relVel, normal);
 
-    // if (normVel > 0) {
-    // return;
-    // }
+    
+    // the penetration correction on both colliding bodies
+     if (normVel > 0) {  
+     return;
+     }
 
+    // the impulse effect on both colliding bodies
     j = impulse(normVel, epsilon, bodyA.mass, bodyB.mass);
     bodyA.velocity -= (j / bodyA.mass) * normal;
     bodyB.velocity += (j / bodyB.mass) * normal;

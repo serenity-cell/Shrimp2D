@@ -11,7 +11,6 @@ private:
   glm::vec2 gravity = glm::vec2(0.0f, 98.1f);
 
   // penetration correction variables
-  glm::vec2 difference;
   float distance;
 
   // declerations for resolveCollision function
@@ -20,10 +19,10 @@ private:
   float normVel;
   float j;
 
-  // constants for penetration
-  float slop;
-  float percent;
-  
+  float sumX;
+  float sumY;
+  float radius_sum;
+
 public:
 
   void applyGravity(circleBody &body);
@@ -40,9 +39,10 @@ public:
   float normalVelocity(glm::vec2 relativeVelocity, glm::vec2 normal);
 
   // formulas for penetration upon a circle collision
-  float invSum (float invMassA, float invMassB);
-  void penetrationDepth(const glm::vec2 bodyA, const glm::vec2 bodyB, float radiusA, float radiusB);
-  void penetrationCorrection(const glm::vec2 bodyA, const glm::vec2 bodyB, float radiusA, float radiusB); 
+  float checkDistance(const glm::vec2 &objectA, const glm::vec2 &objectB,  float radiusA,  float radiusB);
+  float normlizeDirection();
+  float calculateOverlap();
+  void penetrationCorrection(circleBody &bodyA, circleBody &bodyB); 
 
   // collision checks
   bool isColliding(const glm::vec2 &objectA, const glm::vec2 &objectB, const float radiusA, const float radiusB);
