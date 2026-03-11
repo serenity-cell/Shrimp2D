@@ -40,9 +40,11 @@ public:
 
   void initCircles();
   void updateGravity(int i);
-  void updateWindowCollision(int i);
-  void updateCircleCollision(int i);
-  void updatePhysics(int i);
+  void solveWindowCollision(int i);
+  void solveCircleCollision(int i);
+  void applyForces(int i);
+
+  void updatePosition(int i);
   
   // reseting dt on PhysicsWorld loop
   void updateDeltaTime();
