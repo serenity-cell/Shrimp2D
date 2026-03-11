@@ -1,6 +1,10 @@
 #include "collision.hpp"
 
-void solver::applyGravity(circleBody &body) { body.add_acceleration(gravity); }
+float slop = 0 ;
+
+void solver::applyGravity(circleBody &body) {
+  body.add_acceleration(gravity); 
+}
 
 // collision check and resolution on ground
 void solver::resolveGround(circleBody &body, float groundY) {
@@ -50,15 +54,28 @@ float solver::normalVelocity(glm::vec2 relativeVelocity, glm::vec2 normal) {
   return glm::dot(relativeVelocity, normal);
 }
 
-float solver::impulse(float normalVelocity, float epsilon, float massA,
-                      float massB) {
+float solver::impulse(float normalVelocity, float epsilon, float massA, float massB) {
   return -(1 + epsilon) * normalVelocity / (1 / massA + 1 / massB);
 }
 
 // penetration correction
-void solver::penetrationCorrection(const glm::vec2 bodyA, const glm::vec2 bodyB, float radiusA, float radiusB) {
+void solver::penetrationDepth(const glm::vec2 bodyA, const glm::vec2 bodyB, float radiusA, float radiusB) {
+  difference = bodyB - bodyA;
+  distance = glm::length(difference);
 
+  if (distance < radiusA + radiusB) {
+    normal = difference/ distance;
+  }
+  else {
+    normal = glm::vec2(1, 0);
+  }
+  float penetration = (radiusA - radiusB) - distance;
+  if (penetration > 0) {
+    return;
+  }
 }
+
+
 
 // collision check used between two circles (ONLY THIS NEEDS TO BE USED)
 void solver::resolveCollision(circleBody &bodyA, circleBody &bodyB) {
@@ -66,8 +83,9 @@ void solver::resolveCollision(circleBody &bodyA, circleBody &bodyB) {
     relVel = relativeVelocity(bodyA.velocity, bodyB.velocity);
     float normVel = normalVelocity(relVel, normal);
 
-    if (normVel > 0)
-    return;
+    // if (normVel > 0) {
+    // return;
+    // }
 
     j = impulse(normVel, epsilon, bodyA.mass, bodyB.mass);
     bodyA.velocity -= (j / bodyA.mass) * normal;
