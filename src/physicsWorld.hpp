@@ -12,7 +12,7 @@
 
 #ifndef PHYSICSWORLD_HPP
 #define PHYSICSWORLD_HPP
-class physicsWorld {
+class PhysicsWorld {
 protected:
   // SFML variables
   sf::RenderWindow *window;
@@ -25,9 +25,9 @@ protected:
   // initializing the window and states
   void initWindow();
 
-  circleBody circlePosition = circleBody(0.0, 0.0);
-  solver physics;
-  static sf::CircleShape circle;
+  circleBody CirclePosition = circleBody(0.0, 0.0);
+  solver Physics;
+  static sf::CircleShape Circle;
 
   const unsigned int maxWidth = 800;
   const unsigned int maxHeight = 600;

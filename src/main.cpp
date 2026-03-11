@@ -2,6 +2,6 @@
 
 int main()
 {   
-    physicsWorld world;
+    PhysicsWorld world;
     world.run();
 }
