@@ -1,4 +1,4 @@
-# Shrimp2D (work-in-progress)
+# Shrimp2D (completed)
 
 ## Project Description
 Shrimp2D is a 2d physics engine with mainly (for now) circles. i used pure c++ for the whole project with the purpose of imrpovement in mind. 
