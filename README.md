@@ -6,8 +6,11 @@ Shrimp2D is a 2d physics engine with mainly (for now) circles. i used pure c++ f
 ## what would I improve
 This is clearly a very basic 2D physics engine, and I will not, by any means, try to make it bigger than it should, as that would take too long for only one person. With that being said, I want to expand its capabilities by including AABB (squares, rectangles) shapes with their own collision and physics. Another thing I would like to include is how efficient the code is, as I know there are things I can improve to make it a less resource-intensive engine, especially when adding hundreds of bodies.
 
+## AI usage
+I wont deny the use of AI, especially for the penetration correction, but I have taken the liberty to at least learn the basics and rewrite the whole function from scratch and make it work regardless. I am pretty sure the logic is essentially the same as I just needed the function to be explained deeper so I can write the code. I feel like the use of AI isnt an issue as long as you dont let it write a big portion of the code for you.
+
 ## Credit
-Although, the code is writen by me, here are the sources I used that taught me collision, sfml basics, and other stuff
+Although, the code is written by me, here are the sources I used that taught me collision, sfml basics, and other stuff
 
 * https://code.tutsplus.com/how-to-create-a-custom-2d-physics-engine-the-basics-and-impulse-resolution--gamedev-6331t
 * https://www.sfml-dev.org/tutorials/3.0/
