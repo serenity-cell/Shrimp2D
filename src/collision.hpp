@@ -11,7 +11,17 @@ private:
   glm::vec2 gravity = glm::vec2(0.0f, 98.1f);
 
   // penetration correction variables
-  float distance;
+  float distance_root;
+  float sumX;
+  float sumY;
+  float radius_sum;
+  float inverse_massA;
+  float inverse_massB;
+  float inverse_mass_sum;
+  glm::vec2 vector_difference;
+
+  float distance_squared;
+  float penetration;
 
   // declerations for resolveCollision function
   glm::vec2 normal;
@@ -19,9 +29,7 @@ private:
   float normVel;
   float j;
 
-  float sumX;
-  float sumY;
-  float radius_sum;
+  
 
 public:
 

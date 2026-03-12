@@ -24,8 +24,6 @@ void solver::resolveWall(circleBody &body, float groundX) {
   }
 }
 
-
-
 bool solver::isColliding(const glm::vec2 &a, const glm::vec2 &b, const float radiusA, const float radiusB) {
   sumX = b.x - a.x;
   sumY = b.y - a.y;
@@ -66,37 +64,48 @@ float solver::impulse(float normalVelocity, float epsilon, float massA, float ma
 }
 
 void solver::penetrationCorrection(circleBody &bodyA, circleBody &bodyB) {
-  // Simple positional correction (prevents sinking/merging).
-  // Based on "slop + percent" style correction:
-  //   correction = max(penetration - slop, 0) / (invMassA + invMassB) * percent * normal
-  constexpr float percent = 0.8f; // 0..1 (higher = more aggressive separation)
-  constexpr float slop = 0.01f;   // small overlap allowed (prevents jitter)
 
-  const glm::vec2 delta = bodyB.position - bodyA.position;
-  const float dist2 = glm::dot(delta, delta);
-  if (dist2 <= 0.0f) {
-    return;
-  }
+  // how much collision penetration is allowed and how much to seperate by
+  constexpr float percent = 0.8;
+  constexpr float slop = 0.1;
 
-  const float dist = std::sqrt(dist2);
-  const float penetration = (bodyA.radius + bodyB.radius) - dist;
+  const glm::vec2 vector_difference = bodyB.position - bodyA.position;
+  distance_squared = glm::dot(vector_difference, vector_difference);
+
+  if (distance_squared <= 0.0f) {
+      return;
+    }
+
+  distance_root = std::sqrt(distance_squared);
+  penetration = (bodyA.radius + bodyB.radius) - distance_root;
+
   if (penetration <= 0.0f) {
     return;
   }
 
-  const float invMassA = (bodyA.mass > 0.0f) ? (1.0f / bodyA.mass) : 0.0f;
-  const float invMassB = (bodyB.mass > 0.0f) ? (1.0f / bodyB.mass) : 0.0f;
-  const float invMassSum = invMassA + invMassB;
-  if (invMassSum <= 0.0f) {
+  if (bodyA.mass > 0.0f || bodyB.mass > 0.0f) {
+    inverse_massA = 1 / bodyA.mass;
+    inverse_massB = 1 / bodyB.mass;
+  }
+  else {
+    inverse_massA = 0;
+    inverse_massB = 0;
+  }
+  
+
+  inverse_mass_sum = inverse_massA + inverse_massB;
+  if (inverse_mass_sum <= 0.0f) {
     return;
   }
 
-  const glm::vec2 n = delta / dist; // A -> B
-  const float correctionMag = (std::max(penetration - slop, 0.0f) / invMassSum) * percent;
-  const glm::vec2 correction = correctionMag * n;
+  const glm::vec2 normal =  vector_difference / distance_root;
 
-  bodyA.position -= correction * invMassA;
-  bodyB.position += correction * invMassB;
+  const float correction_magnitude = (std::max(penetration - slop, 0.0f) / inverse_mass_sum) * percent;
+  const glm::vec2 correction = correction_magnitude * normal;
+
+
+  bodyA.position -= correction * inverse_massA;
+  bodyB.position += correction * inverse_massB;
 }
 
 // collision check used between two circles (ONLY THIS NEEDS TO BE USED)
